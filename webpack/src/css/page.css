@@ -1,0 +1,547 @@
+/*
+* @Author: Administrator
+* @Date:   2017-10-15 21:57:55
+* @Last Modified by:   Administrator
+* @Last Modified time: 2017-12-10 17:34:21
+*/
+* {
+  margin: 0;
+  padding: 0
+}
+
+a {
+  list-style: none;
+  text-decoration: none;
+}
+
+ul,li {
+  list-style: none;
+}
+
+nav {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  background: rgba(3,3,3,.5);
+  box-shadow: 0 3px 3px rgba(3,3,3,.2);
+  opacity: 0.8;
+  z-index: 3;
+}
+
+.clearfix:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+nav div.nav-ct {
+  width: 1240px;
+  padding-left: 105px;
+  padding-right: 15px;
+}
+
+div.nav-ct>a {
+  float: left;
+  font-family: "Kaushan Script", "Helvetica Neue", Helvetica, Arial, cursive;
+  color: #fed136;
+  font-size: 2em;
+  padding: 15px 15px;
+  line-height: 20px;
+}
+
+nav div.nav-ct>a:hover {
+  opacity: 0.8;
+}
+
+div.nav-ct ul.nav-list li {
+  float: right;
+}
+div.nav-ct ul.nav-list li a {
+  display: block;
+  padding: 15px 15px;
+  line-height: 20px;
+  color: #fff;
+  letter-spacing: 1px;
+}
+
+div.nav-ct ul.nav-list li a:hover {
+  color: #fed136;
+}
+
+/* carousel */
+
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 960px;
+  overflow: hidden;
+}
+
+.carousel .img-ct {
+  position: absolute;
+  overflow: hidden;
+}
+
+.carousel .img-ct li {
+  float: left;
+}
+
+ul.img-ct>li{
+  float: left;
+}
+
+ul.img-ct>li>a {
+    display: block;
+    font-size: 0;
+}
+
+.carousel .arrow {
+  position: absolute;
+  top: 50%;
+  margin-top: -15px;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  line-height: 30px;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+}
+
+.carousel .arrow:hover {
+  opacity: 0.7;
+}
+
+.carousel .pre {
+  left: 10px;
+}
+
+.carousel .next {
+  right: 10px;
+}
+
+.carousel .bullet {
+  position: absolute;
+  width: 100%;
+  bottom: 10px;
+  text-align: center;
+}
+
+.carousel .bullet >li {
+  display: inline-block;
+  width: 30px;
+  height: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0;
+}
+
+.carousel .bullet >li.active {
+  background-color: #ccc;
+}
+
+
+div.container {
+  position: absolute;
+  top: 50%;
+  margin-top: -95px;
+  left: 50%;
+  margin-left: -539px;
+  text-align: center;
+  color: #fff;
+}
+
+div.intro-head {
+  font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-style: italic;
+  font-size: 40px;
+  line-height: 40px;
+  margin-bottom: 25px;
+}
+
+div.content {
+  font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 55px;
+  line-height: 75px;
+  margin-bottom: 50px;
+}
+
+a.join {
+  font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #fff;
+  display: inline-block;
+  text-align: center;
+  font-weight: 700;
+  border-radius: 3px;
+  font-size: 20px;
+  padding: 20px 40px;
+  border: 1px solid transparent;
+  background-color: #fed136;
+  margin-top: 40px;
+}
+a.join:hover {
+  background-color: #fec503;
+  border-color: #f6bf01;
+}
+
+section#story {
+  background: url("http://lol.qq.com/act/a20170610comic/issue/cover/cover-desktop.jpg") center top no-repeat;
+  background-size: cover;
+  text-align: center;
+  padding-top: 200px;
+  padding-bottom: 140px;
+}
+section#story ul {
+  width: 855px;
+  margin: 0 auto;
+}
+section#story ul li {
+  float: left;
+  width: 260px;
+  height: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)!important; 
+  margin-right: 25px;
+  background-color: #84888B;
+  cursor: pointer;
+}
+section#story ul li:hover {
+  background-color: #fff;
+}
+section#story ul li img {
+  width: 260px;
+  height: 150px
+}
+
+
+section#story ul li h3 {
+  margin: 15px;
+}
+section#story div.sto-head1 {
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 44px;
+  font-weight: 600;
+  color: #666;
+  margin-bottom: 10px;
+}
+section#story div.sto-head2 {
+  font-weight: 300;
+  font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  color: #888;
+  font-size: 22px;
+  margin-bottom: 70px;
+}
+
+section#character {
+  background: url(http://ossweb-img.qq.com/images/lol/act/a20170612vs/bg-light.jpg) center top no-repeat;
+}
+section#character div.cha-wrap {
+  width: 1350px;
+  padding-top: 150px;
+  padding-bottom: 100px;
+  margin: 0 auto;
+  text-align: center;
+}
+section#character div.cha-wrap div.cha-head1 {
+  font-size: 40px;
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #777;
+}
+section#character div.cha-wrap div.cha-head2 {
+  font-size: 16px;
+  font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: none;
+  font-style: italic;
+  font-weight: 400;
+  margin-bottom: 75px;
+  color: #888;
+}
+section#character div.cha-wrap ul{
+  height: 800px;
+  width: 1000px;
+  margin: 0 auto;
+}
+section#character div.cha-wrap ul li {
+  box-sizing: border-box;
+  display: inline-block;
+  width: 300px;
+  margin-right: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+  position: absolute;
+  transition: all 1s;
+}
+section#character div.cha-wrap ul li.h1 {
+  height: 200px;
+  background: #fff;
+}
+
+section#character div.cha-wrap ul li.h2 {
+  height: 300px;
+  background: #fff;
+}
+
+section#character div.cha-wrap ul li.h3 {
+  height: 400px;
+  background: #fff;
+}
+.content {
+  position: relative;
+}
+section#character div.cha-wrap ul li div {
+  background-color: #fff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)!important;
+}
+section#character div.cha-wrap ul li img {
+  width: 100%;
+  height: 100%;
+}
+section#character div.cha-wrap ul li h1 {
+  padding: 18px 0 8px;
+}
+section#character div.cha-wrap ul li h2 {
+  padding-bottom: 18px;
+}
+
+section#team {
+  background: url(http://game.gtimg.cn/images/lpl/es/2017worlds/bg3.jpg) center top no-repeat;
+  background-size: cover;
+  color: #fff;
+  text-align: center;
+}
+section#team h1 {
+  padding-top: 150px;
+  padding-bottom: 75px;
+  font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 40px;
+  font-weight: 700;
+}
+section#team ul {
+  margin: 0 auto;
+  width: 1260px;
+  padding-bottom: 150px;
+}
+section#team ul li div {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  overflow: hidden;
+  padding: 0 25px;
+}
+section#team ul li p {
+  padding-top: 25px;
+}
+section#team ul li div img {
+  width: 100%;
+  height: 100%;
+}
+section#team ul li {
+  float: left;
+  width: 210px;
+  text-align: center;
+  padding-bottom: 90px;
+  cursor: pointer;
+}
+
+section#team ul li:hover {
+  color: #FFDB31;
+}
+
+section#contestant {
+  background: url("http://game.gtimg.cn/images/lpl/es/2017worlds/bg3.jpg")center top no-repeat;
+  /*http://ossweb-img.qq.com/images/lpl/web201612/team_banner-bg.jpg*/
+  background-size: 100% 100%;
+  text-align: center;
+  color: #fff;
+}
+section#contestant div.list-item div.img1 {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border:7px solid #ccc;
+  background: url("http://img.crawler.qq.com/lolwebvideo/20170922134541/e286218059817a3e4ce14b4f8b9ddece/0") center top no-repeat;
+  background-size: cover;
+}
+section#contestant div.list-item div.img2 {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border:7px solid #ccc;
+  background: url("http://img.crawler.qq.com/lolwebvideo/20170922134239/99cdce6fd89f5c4a86323ed7e40f3254/0") center top no-repeat;
+  background-size: cover;
+}
+section#contestant div.list-item div.img3 {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border:7px solid #ccc;
+  background: url("http://img.crawler.qq.com/lolwebvideo/20170922134122/fa266702a1ffca9aaf462b0f208440fe/0") center top no-repeat;
+  background-size: cover;
+}
+section#contestant div.list-item {
+  float: left;
+  padding: 80px 90px 80px;
+  cursor: pointer;
+}
+section#contestant div.list-item:hover {
+  color: #FFDB31;
+}
+section#contestant div.contestant-ct {
+  width: 1182px;
+  margin: 0 auto;
+}
+section#contestant div.contestant-ct div.head-wrap h1 {
+  font-size: 40px;
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #777;
+  padding-top: 150px;
+  padding-bottom: 10px;
+}
+
+section#contestant div.contestant-ct div.head-wrap h2 {
+  font-size: 26px;
+  font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: none;
+  font-style: italic;
+  font-weight: 400;
+  margin-bottom: 55px;
+  color: #888;
+}
+section#contestant div.contestant-ct div.list-item div.img-describe h4 {
+  font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  margin-top: 25px;
+  margin-bottom: 5px;
+  font-size: 20px;
+}
+section#contestant div.contestant-ct {
+  padding-bottom: 100px;
+}
+
+section#contact {
+  background: url("http://ossweb-img.qq.com/images/lpl/web201612/team_banner-bg.jpg") center top no-repeat;
+  background-size: cover;
+}
+
+section#contact div.contact-ct {
+  padding:150px 0;
+  width: 1170px;
+  margin: 0 auto;
+}
+section#contact div.contact-ct div.contact-form form {
+  margin: 0 auto;
+}
+section#contact div.contact-ct div.contact-form form div {
+  float: left;
+}
+section#contact div.contact-ct div.contact-form form div.row {
+  width: 50%;
+  padding-left: 15px;
+  padding-right: 15px;
+  box-sizing: border-box;
+}
+section#contact div.contact-ct div.contact-form form div.row input {
+  display: block;
+  width: 100%;
+  height: 20px;
+  padding: 20px;
+  margin-bottom: 25px;
+  border:1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+}
+section#contact div.contact-ct div.contact-form form div.column {
+  width: 50%;
+  padding-left: 15px;
+  padding-right: 15px;
+  box-sizing: border-box;
+}
+section#contact div.contact-ct div.contact-form form div.column textarea {
+  width: 100%;
+  height: 176px;
+  padding: 20px;
+  box-sizing: border-box;
+  border: 1px solid　#ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+}
+section#contact div.contact-ct div.contact-text {
+  text-align: center;
+}
+section#contact div.contact-ct div.contact-text h1 {
+  font-size: 40px;
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #fff;
+}
+section#contact div.contact-ct div.contact-text p {
+  font-size: 16px;
+  font-family: "Droid Serif", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: none;
+  font-style: italic;
+  font-weight: 400;
+  margin-bottom: 75px;
+  color: #fff;
+}
+div.button {
+  text-align: center;
+  padding-top: 50px;
+}
+div.button a {
+  display: inline-block;
+  color: #fff;
+  background-color: #fed136;
+  border-color: #fed136;
+  font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  text-transform: uppercase;
+  font-weight: 700;
+  border-radius: 3px;
+  font-size: 18px;
+  padding: 20px 40px;
+}
+div.button a:hover {
+  background-color: #fec503;
+  border-color: #f6bf01;
+}
+footer {
+    width: 100%;
+    padding: 3rem 0 5rem;
+    background-color: #eaeaea;
+    text-align: center;
+    line-height: 24px;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+/* back-to-top */
+
+.back-to-top{
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  padding: 4px 8px;
+  border: 1px solid #888;
+  background-color: #fff;
+  cursor: pointer;
+  padding: 15px;
+  border-radius: 10px;
+}
