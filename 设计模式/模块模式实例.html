@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>模块模式实例</title>
+</head>
+<body>
+    
+    <script type="text/javascript">
+        var Person = (function(){
+            var name = 'xuguojun';
+            function sayName(){
+                console.log(name);
+            }
+    
+            return {
+                name: name,
+                sayName: sayName
+            }
+        })();
+
+        Person.sayName();
+    </script>
+</body>
+</html>

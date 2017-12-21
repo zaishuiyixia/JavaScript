@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>发布订阅模式</title>
+    <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        var PubSub = function() {
+            // 储存事件映射表
+            this.eventPool = {};
+        };
+        PubSub.prototype.off = function(topicName) {
+            delete this.eventPool[topicName];
+        };
+        PubSub.prototype.trigger = function() {
+            // 把类数组对象arguments转化为数组
+            var _arg = [].slice.call(arguments);
+            var topicName = _arg.shift();
+            var callbackArg = _arg;
+            var topicCallback = this.eventPool[topicName];
+            if (!topicCallback) {
+                return;
+            }
+            for(var i=0; i<topicCallback.length; i++){
+                // apply传递参数时，写成数组形式，所以可以直接把callbacArg传进去
+                topicCallback[i].apply(this,callbackArg);
+            }
+        };
+        PubSub.prototype.on = function(topicName,callback) {
+            var topic = this.eventPool[topicName];
+            if (!topic) {
+                this.eventPool[topicName] = [];
+            }
+            this.eventPool[topicName].push(callback);
+        }
+    </script>
+    <style>
+        .container{
+            width: 1000px;
+            margin: 0 auto;
+            margin-top: 200px;
+        }
+        .demo{
+            border: 1px solid coral;
+            padding: 30px;
+            margin: 5px;
+        }
+        .description{
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>发布订阅模式</div>
+        <div class="demo pub-sub">
+            <div class="description">实现功能：对点击次数累加求和，并记录当前点击次数。如果点击了5次，则会计算result is=1+2+3+4+5。</div>
+            <div>
+                发布订阅模式实例
+                <button id="ps-btn">
+                    点击次数
+                    <span>0</span>
+                </button>
+                <div id="pub-sub">
+                    result is ———— <span>0</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <script type="text/javascript">
+        var PubSub = new PubSub();
+        PubSub.on('click',function(value,nextData) {
+            $('#ps-btn span').html(nextData-1);
+        });
+        PubSub.on('click',function(value) {
+            $('#pub-sub span').html(value);
+        });
+        var pub_data = [0];
+        $('#ps-btn').click(function() {
+            pub_data.push(pub_data.length);
+            var value = pub_data.reduce(function(pre,cur) {
+                return pre+cur
+            },0)
+            PubSub.trigger('click',value,pub_data.length);
+        })
+    </script>
+</body>
+</html>

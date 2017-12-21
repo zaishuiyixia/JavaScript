@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>单例模式</title>
+    <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        var singleton = function(){
+            var instance;
+            var createInstance = function(){
+                this.a = 1;
+                this.b = 2;
+            };
+            return {
+                getInstance: function() {
+                    if (!instance) {
+                        instance = new createInstance();
+                    }
+                    return instance;
+                }
+            }
+        }
+    </script>
+    <style type="text/css">
+        .demo{
+            border:1px solid coral;
+            padding:30px;
+            margin:15px;
+        }
+        .container{
+            width: 1000px;
+            margin: 0 auto;
+            margin-top: 200px;
+        }
+        .description{
+            margin-bottom: 10px;
+        }
+        button{
+            margin: 5px 0 5px 0;
+        }
+    </style>    
+</head>
+    <body>
+        <div class="container">
+            <div>单例模式</div>
+
+            <div class="demo">
+                <div class="description">实现功能：每次点击按钮1和按钮2，都会加1，值在对应按钮下面的result is显示；当点击完按钮1在点击按钮2时，会在按钮1值的基础上加1，值在按钮2下面的result is显示，反过来亦是如此。</div>
+            <div>
+                <button id='s-b-1'>按钮1</button>
+                <div>
+                    result is ---- <span id='s1'>0</span>
+                </div>
+                <button id='s-b-2'>按钮2</button>
+                <div>
+                    result is ---- <span id='s2'>0</span>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            // 创建第一个实例
+            var Factory = singleton();
+            var singleton_1 = Factory.getInstance();
+            $('#s-b-1').click(function(){
+                $('#s1').html(singleton_1.a);
+                singleton_1.a++
+            })
+
+            // 创建第二个实例
+            var singleton_2 = Factory.getInstance();
+            $('#s-b-2').click(function(){
+                $('#s2').html([
+                    singleton_2.a ,
+                    ' 第二个实例和第一个实例指向同一个引用'
+                    ].join(''));
+                singleton_1.a++
+            })
+        </script>
+    </body>
+</html>

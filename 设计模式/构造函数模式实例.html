@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>构造函数模式实例</title>
+</head>
+<body>
+    
+    <script>
+        function Person(name, age){
+            this.name = name;
+            this.age = age;
+        }
+        Person.prototype.sayName = function(){
+            return this.name;
+        };
+
+        var person1 = new Person("xuguojun", 24);
+    </script>
+</body>
+</html>
