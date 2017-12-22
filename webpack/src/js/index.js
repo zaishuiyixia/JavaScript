@@ -2,7 +2,7 @@
 * @Author: Administrator
 * @Date:   2017-12-16 17:48:35
 * @Last Modified by:   Administrator
-* @Last Modified time: 2017-12-16 22:05:05
+* @Last Modified time: 2017-12-22 12:20:35
 */
 var $ = require('jquery');
 var Carousel = require('./com/carousel.js');
@@ -14,6 +14,6 @@ Carousel();
 
 Expose($);
 
-goTop('#back-to-top');
+goTop('.back-to-top');
 
 Waterfull();

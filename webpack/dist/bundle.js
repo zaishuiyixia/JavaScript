@@ -33,6 +33,9 @@
 /******/ 	// expose the module cache
 /******/ 	__webpack_require__.c = installedModules;
 /******/
+/******/ 	// identity function for calling harmony imports with the correct context
+/******/ 	__webpack_require__.i = function(value) { return value; };
+/******/
 /******/ 	// define getter function for harmony exports
 /******/ 	__webpack_require__.d = function(exports, name, getter) {
 /******/ 		if(!__webpack_require__.o(exports, name)) {
@@ -60,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 2);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -120,30 +123,6 @@ module.exports = Waterfull;
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/*
-* @Author: Administrator
-* @Date:   2017-12-16 17:48:35
-* @Last Modified by:   Administrator
-* @Last Modified time: 2017-12-16 22:05:05
-*/
-var $ = __webpack_require__(0);
-var Carousel = __webpack_require__(3);
-var Expose = __webpack_require__(4);
-var goTop = __webpack_require__(5);
-var Waterfull = __webpack_require__(1);
-
-Carousel();
-
-Expose($);
-
-goTop('#back-to-top');
-
-Waterfull();
-
-/***/ }),
-/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -248,7 +227,7 @@ module.exports = Carousel;
 
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -338,7 +317,7 @@ function Exposure(){
 module.exports = Exposure;
 
 /***/ }),
-/* 5 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -366,6 +345,30 @@ function goTop(id){
 }
 
 module.exports = goTop;
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*
+* @Author: Administrator
+* @Date:   2017-12-16 17:48:35
+* @Last Modified by:   Administrator
+* @Last Modified time: 2017-12-22 12:20:35
+*/
+var $ = __webpack_require__(0);
+var Carousel = __webpack_require__(2);
+var Expose = __webpack_require__(3);
+var goTop = __webpack_require__(4);
+var Waterfull = __webpack_require__(1);
+
+Carousel();
+
+Expose($);
+
+goTop('.back-to-top');
+
+Waterfull();
 
 /***/ })
 /******/ ]);
