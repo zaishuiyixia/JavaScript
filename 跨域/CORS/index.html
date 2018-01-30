@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>news</title>
+  <style>
+    .container{
+      width: 900px;
+      margin-left: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <ul class="news">
+      <li>第十一日前瞻：中国冲击4金 博尔特再战</li>
+      <li>正直播LOL赛事 SKT、EDG再相遇</li>
+      <li>火影今日完结！ 耗死柯南的重任交给了海贼王</li>
+    </ul>
+    <button class="change">换一组</button>
+  </div>
+  <script>
+    $('.change').addEventListener('click',function(){
+      var xhr = new XMLHttpRequest();
+      xhr.onreadystatechange = function(){
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          appendHtml(JSON.parse(xhr.responseText))
+        }
+      }
+      //open里的url参数表示请求发送的网址，这个网址是ajax请求发出后要到达的地址，不是指而jax请求是从这个网址发出的。
+      xhr.open('get','http://a.jrg.com:8080/getNews',true);
+      xhr.send();
+    })
+
+    function appendHtml(news){
+      var html = '';
+      for (var i = 0; i < news.length; i++) {
+        html += '<li>' + news[i] + '</li>';
+      }
+      $('.news').innerHTML = html;
+    }
+
+    function $(id){
+      return document.querySelector(id);
+    }
+  </script>
+</body>
+</html>
