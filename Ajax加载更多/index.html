@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>JS Bin</title>
+    <link rel="stylesheet" href="main.css"/>
+</head>
+
+<body>
+
+    <ul id="ct"></ul>
+    <a id="load-more" class="btn" href="#">
+      加载更多
+    </a>
+
+    <script>
+    var btn = document.querySelector('#load-more');
+    var ct = document.querySelector('#ct');
+    var pageIndex = 0;
+    //设置状态锁，防止数据到来之前用户重复点击
+    var isDataArrive = true;
+
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        if (!isDataArrive) {
+            return;
+        }
+
+        loadData(function(news) {
+            renderPage(news);
+        })
+    })
+
+    function loadData(callback) {
+        ajax({
+            type: 'get',
+            url: '/loadMore',
+            data: {
+                index: pageIndex,
+                length: 5
+            },
+            onSuccess: callback,
+            onError: function() {
+                console.log('出错了')
+            }
+        })
+    }
+
+    function renderPage(results) {
+        var fragment = document.createDocumentFragment();
+        for (var i = 0; i < results.length; i++) {
+            var node = document.createElement('li');
+            node.innerText = results[i];
+            fragment.appendChild(node);
+        }
+        ct.appendChild(fragment)
+    }
+
+    function ajax(options) {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200 || xhr.status === 304) {
+                    //与后端约定好，传输的数据类型为JSON字符串，JSON.parse()用来把JSON字符串解析为原生JavaScript值
+                    var results = JSON.parse(xhr.responseText);
+                    options.onSuccess(results);
+                    pageIndex = pageIndex + 5;
+                } else {
+                    options.onError();
+                }
+                //数据到来，布尔值设为true
+                isDataArrive = true
+            }
+        }
+
+        var str = '';
+        for (var key in options.data) {
+            str += key + '=' + options.data[key] + '&';
+        }
+        str = str.substr(0, str.length - 1);
+        console.log(str)
+
+        if (options.type.toLowerCase() === 'get') {
+            xhr.open(options.type, options.url + '?' + str, true)
+            xhr.send()
+        }
+        if (options.type.toLowerCase() === 'post') {
+            xhr.open('post', options.url, true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.send(str);
+        }
+        //发送ajax请求，这时数据还没有到来，布尔值设为false
+        isDataArrive = false;
+    }
+    </script>
+</body>
+
+</html>
