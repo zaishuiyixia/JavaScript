@@ -14,7 +14,6 @@ server start or  mock start
 ```
 __ router.js
 __ index.html
-__ main.css
 ```
 - `router.js ` 是后端文件，用来模拟数据交互
 - `index.html` 是静态文件
