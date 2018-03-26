@@ -23,30 +23,23 @@
   
 <script>
   
-  $('.change').addEventListener('click',function(){
-
-    var xhr = new XMLHttpRequest();
-    xhr.open('get','http://a.jrg.com:8080/getNews',true);
-    xhr.send();
-    xhr.onreadystatechange = function(){
-      if(xhr.readyState === 4){
-        if (xhr.status === 200 || xhr.status === 304) {
-          appendHtml(JSON.parse(xhr.responseText))
-        }
-      }
-    }
+  $('.change').addEventListener('click', function(){
+    var script = document.createElement('script');
+    script.src = 'http://127.0.0.1/getNews?callback=appendHtml';
+    document.head.appendChild(script);
+    document.head.removeChild(script);
   })
   function appendHtml(news){
     var html = '';
-    for(var i = 0; i<news.length;i++){
-      html +='<li>' + news[i] + '</li>';
+    for( var i=0; i<news.length; i++){
+      html += '<li>' + news[i] + '</li>';
     }
     console.log(html);
     $('.news').innerHTML = html;
   }
   function $(id){
-      return document.querySelector(id)
-    }
+    return document.querySelector(id);
+  }
 </script>
 </body>
 </html>
