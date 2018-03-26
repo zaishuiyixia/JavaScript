@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>AJAX的封装</title>
+    <style>
+    ul,
+    li {
+        margin； 0； padding: 0
+    }
+
+    #ct li {
+        list-style: none;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+
+    #load-more {
+        display: block;
+        margin: 10px auto;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    .btn {
+        display: inline-block;
+        ;
+        height: 40px;
+        line-height: 40px;
+        width: 80px;
+        border: 1px solid #E27272;
+        border-radius: 3px;
+        text-align: center;
+        text-decoration: none;
+        color: #E27272;
+    }
+
+    .btn:hover {
+        background: green;
+        color: #fff;
+    }
+    </style>
+</head>
+
+<body>
+
+    <ul id="ct"></ul>
+    <a id="load-more" class="btn" href="#">加载更多</a>
+
+    <script>
+
+    var btn = document.querySelector('#load-more');
+    var ct = document.querySelector('#ct');
+    var pageIndex = 0;
+    //设置状态锁，防止数据到来之前用户重复点击
+    var isDataArrive = true;
+
+    btn.addEventListener('click', function(e) {
+        e.preventDefault();
+
+        if (!isDataArrive) {
+            return;
+        }
+
+        loadData(function(news) {
+            renderPage(news);
+            pageIndex = pageIndex + 5;
+            isDataArrive = true;
+        })
+
+        isDataArrive = false;
+    })
+
+    function loadData(callback) {
+        ajax({
+            type: 'get',
+            url: '/loadMore',
+            data: {
+                index: pageIndex,
+                length: 5
+            },
+            success: callback,
+            error: function() {
+                console.log('出错了')
+            }
+        })
+    }
+
+    function renderPage(results) {
+        var fragment = document.createDocumentFragment();
+        for (var i = 0; i < results.length; i++) {
+            var node = document.createElement('li');
+            node.innerText = results[i];
+            fragment.appendChild(node);
+        }
+        ct.appendChild(fragment)
+    }
+
+    function ajax(options) {
+        options.success = options.success || function() {};
+        options.error = options.error || function() {};
+        options.type = options.type || 'get';
+        options.dataType = options.dataType || 'json';
+        options.data = options.data || {};
+
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200 || xhr.status === 304) {
+                    //如果数据类型是text，则不解析
+                    if (options.dataType === 'text') {
+                        options.success(xhr.responseText)
+                    }
+                    //与后端约定好，传输的数据类型为JSON字符串，JSON.parse()用来把JSON字符串解析为原生JavaScript值
+                    if (options.dataType === 'json') {
+                        var results = JSON.parse(xhr.responseText);
+                        options.success(results);
+                    }
+                   
+                } else {
+                    options.error();
+                }
+            }
+        }
+
+        var str = '';
+        for (var key in options.data) {
+            str += key + '=' + options.data[key] + '&';
+        }
+        str = str.substr(0, str.length - 1);
+
+        if (options.type.toLowerCase() === 'get') {
+            xhr.open(options.type, options.url + '?' + str, true)
+            xhr.send()
+        }
+        if (options.type.toLowerCase() === 'post') {
+            xhr.open('post', options.url, true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.send(str);
+        }
+    }
+    </script>
+</body>
+
+</html>
