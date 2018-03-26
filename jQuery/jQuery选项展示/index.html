@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    ul,
+    li {
+        margin: 0;
+        padding: 0;
+    }
+
+    li {
+        list-style: none;
+    }
+
+    a {
+        text-decoration: none;
+        color: #333;
+    }
+
+    .tab-header {
+        background: red;
+        width: 200px;
+    }
+
+    .tab-header>li {
+        position: relative;
+    }
+
+    .tab-header>li>a {
+        display: block;
+        padding: 10px;
+        margin: 0 10px;
+        border-bottom: 1px dashed #fff;
+    }
+
+    span {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+    }
+
+    .tab-header .tab-content {
+        position: absolute;
+        top: 0;
+        left: 200px;
+        background: #fff;
+        border: 1px solid #ccc;
+        width: 210px;
+        font-size: 12px;
+        display: none;
+    }
+
+    .tab-content li {
+        width: 55px;
+        float: left;
+        padding: 10px 20px;
+    }
+
+    .tab-header .active .tab-content {
+        display: block;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="tab">
+        <ul class="tab-header">
+            <li>
+                <a href="">珠宝玉器</a>
+                <span>></span>
+                <ul class="tab-content">
+                    <li><a href="">翡翠</a></li>
+                    <li><a href="">翡翠</a></li>
+                    <li><a href="">翡翠</a></li>
+                    <li><a href="">翡翠</a></li>
+                    <li><a href="">翡翠</a></li>
+                    <li><a href="">翡翠</a></li>
+                    <li><a href="">翡翠</a></li>
+                    <li><a href="">翡翠</a></li>
+                    <li><a href="">翡翠</a></li>
+                    <li><a href="">翡翠</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="">珠宝玉器</a>
+                <span>></span>
+                <ul class="tab-content">
+                    <li><a href="">翡翠</a></li>
+                    <li><a href="">翡翠</a></li>
+                    <li><a href="">翡翠</a></li>
+                    <li><a href="">翡翠</a></li>
+                    <li><a href="">翡翠</a></li>
+                    <li><a href="">翡翠</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="">珠宝玉器</a>
+                <span>></span>
+                <ul class="tab-content">
+                    <li><a href="">翡翠</a></li>
+                    <li><a href="">翡翠</a></li>
+                    <li><a href="">翡翠</a></li>
+                    <li><a href="">翡翠</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="">珠宝玉器</a>
+                <span>></span>
+                <ul class="tab-content">
+                    <li><a href="">翡翠</a></li>
+                    <li><a href="">翡翠</a></li>
+                    <li><a href="">翡翠</a></li>
+                    <li><a href="">翡翠</a></li>
+                    <li><a href="">翡翠</a></li>
+                    <li><a href="">翡翠</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="">珠宝玉器</a>
+                <span>></span>
+                <ul class="tab-content">
+                    <li><a href="">翡翠</a></li>
+                    <li><a href="">翡翠</a></li>
+                    <li><a href="">翡翠</a></li>
+                    <li><a href="">翡翠</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.js"></script>
+    <script>
+    $(function() {
+        $('.tab-header>li').on('mouseenter', function() {
+            $(this).addClass('active');
+        });
+        $('.tab-header>li').on('mouseleave', function() {
+            $(this).removeClass('active');
+        });
+    });
+    </script>
+</body>
+
+</html>
