@@ -27,7 +27,7 @@
           appendHtml(JSON.parse(xhr.responseText))
         }
       }
-      //open里的url参数表示请求发送的网址，这个网址是ajax请求发出后要到达的地址，不是指而jax请求是从这个网址发出的。
+      //open里的url参数表示请求发送的网址，这个网址是ajax请求发出后要到达的地址，不是指jax请求是从这个网址发出的。
       xhr.open('get','http://a.jrg.com:8080/getNews',true);
       xhr.send();
     })
