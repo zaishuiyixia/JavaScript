@@ -45,14 +45,7 @@
   </ul>
   <script src="https://cdn.bootcss.com/jquery/1.9.1/jquery.js"></script>
   <script>
-    /*
-        大体思路：
-    1.对于所有的img标签，把真实的地址放入自定义属性data-img
-    2.当滚动页面时，检查页面所有的img标签，看看这个标签是否出现到我们的视野，当出现在我们的视野时
-    再去判断它是否已经加载过，如果没有加载，加载它
-    */
 
-    
     // 用户第一次打开页面，还未滚动窗口的时候需要执行一次 lazyRender
     lazyRender();
 
