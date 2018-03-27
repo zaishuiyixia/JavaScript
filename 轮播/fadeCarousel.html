@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>无限循环滚动轮播</title>
+  <style>
+    .carousel {
+      margin: 0 auto;
+      margin-top: 200px;
+    }
+    .carousel ul,
+    .carousel li {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    
+    .carousel .img-ct img {
+      width: 400px;
+      height: 250px;
+    }
+
+    /*触发BFC，清除浮动*/
+    .carousel .img-ct {
+      position: absolute;
+      overflow: hidden;
+    }
+
+    /*让需要轮播的图片水平浮动排列一排*/
+    .carousel .img-ct li {
+      float: left;
+    }
+    
+    /*创造可视窗口，大小等于一个图片的宽度，溢出部分不展示*/
+    .carousel {
+      position: relative;
+      width: 400px;
+      height: 250px;
+      overflow: hidden;
+    }
+    
+    .carousel .arrow {
+      position: absolute;
+      top: 50%;
+      margin-top: -15px;
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      line-height: 30px;
+      font-weight: bold;
+      color: #fff;
+      text-align: center;
+      text-decoration: none;
+    }
+    .carousel .arrow:hover {
+      opacity: 0.7;
+    }
+    .carousel .pre {
+      left: 10px;
+    }
+    .carousel .next {
+      right: 10px;
+    }
+    
+    .carousel .bullet {
+      position: absolute;
+      width: 100%;
+      bottom: 10px;
+      text-align: center;
+    }
+    .carousel .bullet >li {
+      display: inline-block;
+      width: 30px;
+      height: 5px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0;
+    }
+    .carousel .bullet >li.active {
+      background-color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="carousel">
+    <ul class="img-ct">
+      <li><a href="javascript:void(0)"><img src="http://cdn.jirengu.com/book.jirengu.com/img/3.jpg" alt="图片加载失败"></a></li>
+      <li><a href="javascript:void(0)"><img src="http://cdn.jirengu.com/book.jirengu.com/img/2.jpg" alt="图片加载失败"></a></li>
+      <li><a href="javascript:void(0)"><img src="http://cdn.jirengu.com/book.jirengu.com/img/4.jpg" alt="图片加载失败"></a></li>
+      <li><a href="javascript:void(0)"><img src="http://cdn.jirengu.com/book.jirengu.com/img/5.jpg" alt="图片加载失败"></a></li>
+    </ul>
+    <a href="#" class="pre arrow"><</a>
+    <a href="#" class="next arrow">></a>
+    <ul class="bullet">
+      <li class="active"></li>
+      <li></li>
+      <li></li>
+      <li></li>
+    </ul>
+  </div>
+  <script src="https://cdn.bootcss.com/jquery/3.1.0/jquery.min.js"></script>
+  <script>
+
+    var $imgCt = $('.img-ct'),
+        $imgWidth = $('.carousel .img-ct >li').eq(0).width(),
+        $imgLen = $('.carousel .img-ct >li').length,
+        $preBtn = $('.carousel .pre'),
+        $nextBtn = $('.carousel .next'),
+        $bullet = $('.bullet li'),
+        lock = false,
+        clock,
+        currentIndex = 0;
+
+    var $last = $imgCt.children("li").last().clone(),
+        $first = $imgCt.children("li").first().clone();
+    
+    //在图片列表开头和结尾分别添加最后一张图和第一张图，这时图片的个数变为6，而$imgLen值还是4，不是动态改变的
+    $imgCt.append($first);
+    $imgCt.prepend($last);
+
+    $imgCt.css({
+      //因为轮播的图片个数可以根据需求改变，所以$imgCt的宽度不应该写死，而应该动态计算
+      width: $imgWidth*($imgLen+2),
+      left: -$imgWidth
+    })
+
+
+    $preBtn.on('click',function(){
+      playPre(1);
+    })
+    $nextBtn.on('click',function(){
+      playNext(1);
+    })
+
+     timeClock();
+
+    //当鼠标在图片上停留时，停止自动轮播
+    $(".carousel").on("mouseenter",function(){
+        clearInterval(clock)
+    })
+    //当鼠标离开时，开始自动轮播
+    $(".carousel").on("mouseleave",function(){
+        timeClock()
+    })
+
+    function playNext(len){
+      //设置状态锁防止滚动过程中重复点击
+      if(lock){
+        return;
+      }
+      lock = true
+      //当前图片淡出
+      $imgCt.fadeOut(500,function(){
+        $imgCt.css({left: "-="+len*$imgWidth});
+        currentIndex+=len;
+      })
+      $imgCt.fadeIn(500,function(){
+        if (currentIndex === $imgLen) {
+          $imgCt.css({left: -$imgWidth});
+          currentIndex = 0;
+        }
+        setBullet();
+        lock = false;
+      })
+      /*
+      $imgCt.animate({
+        left: '-='+len*$imgWidth
+      },function(){
+        currentIndex+=len;
+        if (currentIndex === $imgLen) {
+          currentIndex = 0;
+          $imgCt.css({left: -$imgWidth})
+        }
+      })
+      */
+    }
+    function playPre(len){
+      if(lock){
+        return;
+      }
+      lock = true;
+      $imgCt.fadeOut(500,function(){
+        $imgCt.css({left: "+="+len*$imgWidth});
+        currentIndex -= len;
+      })
+      $imgCt.fadeIn(500,function(){
+        if (currentIndex === -1) {
+          $imgCt.css({left: -$imgLen*$imgWidth});
+          currentIndex = $imgLen-1;
+        }
+        setBullet();
+        lock = false;
+      })
+      /*
+      $imgCt.animate({
+        left: '+='+len*$imgWidth
+      },function(){
+        currentIndex-=len;
+        if (currentIndex === -1) {
+          currentIndex = $imgLen-1;
+          $imgCt.css({left: -$imgLen*$imgWidth})
+        }
+        当滚动到某个图片时，为其对应的小按钮设置样式
+        setBullet();
+        lock = false;
+      })
+      */
+    }
+
+    //点击小按钮滚动到对应图片上
+    $bullet.on('click',function(){
+      var index = $(this).index();
+      if(index > currentIndex){
+        playNext(index - currentIndex)
+      }else if(index < currentIndex){
+        playPre(currentIndex - index);
+      }
+    })
+
+    function setBullet(){
+      $bullet.removeClass('active')
+             .eq(currentIndex)
+             .addClass('active')
+    }
+
+    //自动轮播，每个一秒滚动一次
+    function timeClock(){
+      clock = setInterval(function(){
+         playNext(1)
+       },2000)
+    }
+  </script>
+</body>
+</html>
